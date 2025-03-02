@@ -1,0 +1,28 @@
+@mixin reset_button_defaults() {
+  display: block;
+  font-family: "Lato", serif;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+@mixin flex_center() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex_space-between() {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin text_large($font-size) {
+  font-size: $font-size;
+  font-weight: 700;
+  letter-spacing: .1em;
+}
