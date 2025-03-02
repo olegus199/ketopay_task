@@ -1,6 +1,6 @@
 import styles from "./Navlinks.module.scss";
 import { FC } from "react";
-import { pageNames } from "../../data.ts";
+import { sitemap } from "../../data.ts";
 import { NavLink } from "react-router-dom";
 
 interface NavlinksProps {
@@ -10,7 +10,7 @@ interface NavlinksProps {
 const Navlinks: FC<NavlinksProps> = ({ inFooter }) => {
   return (
     <ul className={`${styles.navlinks} ${inFooter && styles.in_footer}`}>
-      {pageNames.map((pageName, idx) => (
+      {sitemap.map((pageName, idx) => (
         <li
           key={idx}
           className={styles.li}

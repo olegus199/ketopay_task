@@ -1,4 +1,4 @@
-export const pageNames: string[] = [
+export const sitemap: string[] = [
   "home",
   "science",
   "entertainment",

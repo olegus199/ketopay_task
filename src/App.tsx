@@ -1,7 +1,7 @@
 import "./App.scss";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout.tsx";
-import { pageNames } from "./data.ts";
+import { sitemap } from "./data.ts";
 import Page from "./pages/Page/Page.tsx";
 import Home from "./pages/Home/Home.tsx";
 
@@ -17,7 +17,7 @@ function App() {
             index
             element={<Home />}
           />
-          {pageNames.slice(1).map((pageName, idx) => (
+          {sitemap.slice(1).map((pageName, idx) => (
             <Route
               key={idx}
               path={pageName}
