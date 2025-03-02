@@ -28,6 +28,14 @@ function App() {
               }
             />
           ))}
+          <Route
+            path="*"
+            element={
+              <Page>
+                <div>page not found</div>
+              </Page>
+            }
+          />
         </Route>
       </Routes>
     </BrowserRouter>
