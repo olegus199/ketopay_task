@@ -14,6 +14,7 @@ const Navlinks: FC<NavlinksProps> = ({ inFooter }) => {
         <li
           key={idx}
           className={styles.li}
+          onClick={() => window.scrollTo(0, 0)}
         >
           <NavLink
             to={idx === 0 ? "/" : pageName}
