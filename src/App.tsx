@@ -1,7 +1,7 @@
 import "./App.scss";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout.tsx";
-import { sitemap } from "./data.ts";
+import { footerLinks, sitemap } from "./data.ts";
 import Page from "./pages/Page/Page.tsx";
 import Home from "./pages/Home/Home.tsx";
 
@@ -27,6 +27,18 @@ function App() {
                 </Page>
               }
             />
+          ))}
+          {footerLinks.filter((link) => link !== "sitemap").map((link, idx) => (
+            <Route
+              key={idx}
+              path={link}
+              element={
+                <Page>
+                  <div>{link} page</div>
+                </Page>
+              }
+            />
+
           ))}
           <Route
             path="*"
