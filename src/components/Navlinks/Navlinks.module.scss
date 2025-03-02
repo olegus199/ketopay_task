@@ -1,12 +1,6 @@
 @use "../../styles/variables" as *;
 @use "../../styles/mixins" as *;
 
-.navlinks {
-  //display: flex;
-  //flex-direction: column;
-  //justify-content: center;
-}
-
 .li {
   &:not(:last-child) {
     margin-bottom: 1.75rem;
