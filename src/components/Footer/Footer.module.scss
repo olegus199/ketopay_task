@@ -1,0 +1,35 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.footer {
+  padding: 2.5rem 1rem 1.25rem;
+}
+
+.content {
+  @include flex_column();
+  font-size: .75rem;
+  text-align: center;
+}
+
+.footer_links {
+  display: flex;
+  align-items: center;
+}
+
+.li {
+  &:not(:last-child) {
+    margin-right: 1.25rem;
+  }
+}
+
+.logo_container {
+  margin-top: 1.5rem;
+}
+
+.logo_img {
+  margin-top: .5rem;
+}
+
+.footnote {
+  margin-top: 1.5rem;
+}

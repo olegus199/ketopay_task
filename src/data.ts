@@ -1,3 +1,5 @@
+import { FooterLinks } from "./types/types.ts";
+
 export const sitemap: string[] = [
   "home",
   "science",
@@ -6,4 +8,11 @@ export const sitemap: string[] = [
   "business",
   "health",
   "sports",
+];
+
+export const footerLinks: FooterLinks[] = [
+  "login",
+  "about",
+  "publishers",
+  "sitemap",
 ];

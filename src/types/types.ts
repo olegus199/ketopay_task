@@ -1,0 +1,1 @@
+export type FooterLinks = "login" | "about" | "publishers" | "sitemap";

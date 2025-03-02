@@ -21,6 +21,12 @@
   align-items: center;
 }
 
+@mixin flex_column() {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 @mixin text_large($font-size) {
   font-size: $font-size;
   font-weight: 700;
