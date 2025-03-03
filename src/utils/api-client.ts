@@ -59,7 +59,6 @@ export function handleFetchError(error: unknown): FetchError {
           return {
             errStatus: status,
             message: "Ошибка сервера. Пожалуйста, повторите запрос ещё раз",
-            recursive: true,
           };
         default:
           console.error("API error: ", status, error);
@@ -71,7 +70,6 @@ export function handleFetchError(error: unknown): FetchError {
     } else if (error.request) {
       return {
         message: "Нет ответа от сервера. Пожалуйста, попробуйте ещё раз",
-        recursive: true,
       };
     } else {
       console.error("API Error", error);

@@ -1,7 +1,8 @@
 import { combineSlices, configureStore } from "@reduxjs/toolkit";
 import { sidemenuSlice } from "./sidemenuSlice.ts";
+import { articlesSlice } from "./articlesSlice.ts";
 
-const RootReducer = combineSlices(sidemenuSlice);
+const RootReducer = combineSlices(sidemenuSlice, articlesSlice);
 
 export type RootState = ReturnType<typeof RootReducer>;
 
