@@ -1,13 +1,36 @@
 import styles from "./Articles.module.scss";
-import { FC } from "react";
-import { useAppSelector } from "../../hooks/redux-hooks.tsx";
+import { FC, useEffect, useRef } from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks.tsx";
 import { selectArticles } from "../../state/articlesSlice.ts";
 import { formatDate } from "../../utils/format-date.ts";
-import { GroupedArticles, IArticle } from "../../types/types.ts";
+import { IArticle } from "../../types/types.ts";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { scrollToTopVisibilityChanged } from "../../state/scrollToTopSlice.ts";
 
 const Articles: FC = () => {
   const articles = useAppSelector(selectArticles);
+
+  const dispatch = useAppDispatch();
+
+  const firstH2Ref = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        dispatch(scrollToTopVisibilityChanged(false));
+      } else {
+        dispatch(scrollToTopVisibilityChanged(true));
+      }
+    });
+
+    if (firstH2Ref.current) {
+      observer.observe(firstH2Ref.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   return (
     <ul className={styles.articles_blocks}>
@@ -17,7 +40,12 @@ const Articles: FC = () => {
             key={idx}
             className={styles.articles_block}
           >
-            <h2 className={styles.h2}>News for {formatDate(date, "header")}</h2>
+            <h2
+              ref={idx === 0 ? firstH2Ref : undefined}
+              className={styles.h2}
+            >
+              News for {formatDate(date, "header")}
+            </h2>
             <ul className={styles.articles_list}>
               {articles[date].map((article, i) => (
                 <Article

@@ -11,26 +11,14 @@ import Articles from "./Articles.tsx";
 import Loader from "../../ui/Loader.tsx";
 import { useQuery } from "@tanstack/react-query";
 import { calcLatestNewsKey } from "../../utils/latest-news-key.ts";
-
-function initializeFromDate(): string {
-  const today = new Date();
-  const daysAgo = new Date(today);
-  daysAgo.setDate(today.getDate() - 3);
-  return daysAgo.toISOString();
-}
-
-function initializeToDate(): string {
-  const today = new Date();
-  const dayAgo = new Date(today);
-  dayAgo.setDate(today.getDate() - 1);
-  return dayAgo.toISOString();
-}
+import { selectScrollToTopVisibility } from "../../state/scrollToTopSlice.ts";
+import ScrollToTopButton from "../../ui/ScrollToTopButton.tsx";
+import { initializeFromDate, initializeToDate } from "../../utils/init-dates.ts";
 
 const Home: FC = () => {
   const selectedArticles = useAppSelector(selectArticles);
+  const scrollToTopVisible = useAppSelector(selectScrollToTopVisibility);
 
-  // I'm setting initial fromDate and toDate today.getDate() - 1 because newsapi.org has limitations
-  // for free accounts (all articles have a 24 hours delay)
   const [fromDate, setFromDate] = useState(initializeFromDate());
   const [toDate, setToDate] = useState(initializeToDate());
   const [errorMsg, setErrorMsg] = useState("");
@@ -60,7 +48,7 @@ const Home: FC = () => {
   async function fetchArticles(fromDate: string, toDate: string) {
     const config: AxiosRequestConfig = {
       method: "GET",
-      url: `${API_URL}?domains=cnn.com&from=${fromDate}&to=${toDate}&pageSize=20&apiKey=${API_KEY}`,
+      url: `${API_URL}?domains=cnn.com&from=${fromDate}&to=${toDate}&pageSize=40&apiKey=${API_KEY}`,
     };
 
     const response = await fetchData<IArticleResponse>(config);
@@ -134,6 +122,9 @@ const Home: FC = () => {
       {status === "pending" && <Loader />}
       {errorMsg &&
           <div className={styles.error_msg}>An error occurred: {errorMsg}</div>}
+      {scrollToTopVisible && (
+        <ScrollToTopButton />
+      )}
     </Page>
   );
 };
