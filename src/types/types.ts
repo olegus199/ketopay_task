@@ -1,3 +1,12 @@
+export type Sitemap =
+  "home"
+  | "science"
+  | "entertainment"
+  | "technology"
+  | "business"
+  | "health"
+  | "sports"
+
 export type FooterLinks = "login" | "about" | "publishers" | "sitemap";
 
 export interface FetchError {

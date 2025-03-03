@@ -1,6 +1,6 @@
-import { FooterLinks } from "./types/types.ts";
+import { FooterLinks, Sitemap } from "./types/types.ts";
 
-export const sitemap: string[] = [
+export const sitemap: Sitemap[] = [
   "home",
   "science",
   "entertainment",
