@@ -47,6 +47,7 @@ const Navbar = () => {
       <div className={styles.content}>
         <button
           onClick={() => handleMenuToggleButtonClick(true)}
+          aria-label="open menu"
           className={`${styles.menu_toggle_button} ${styles.burger_button} ${isSidemenuOpen && styles.button_hidden}`}
         >
           <MdMenu className={styles.menu_toggle_icon} />
@@ -56,6 +57,7 @@ const Navbar = () => {
 
         <button
           onClick={() => handleMenuToggleButtonClick(false)}
+          aria-label="close menu"
           className={`${styles.menu_toggle_button} ${styles.close_button} ${!isSidemenuOpen && styles.button_hidden}`}
         >
           <HiXMark className={styles.menu_toggle_icon} />
