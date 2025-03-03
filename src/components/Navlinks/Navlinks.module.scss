@@ -10,3 +10,9 @@
     @include text_large(1.375rem);
   }
 }
+
+@media (min-width: 1000px) {
+  .li {
+    text-align: center
+  }
+}

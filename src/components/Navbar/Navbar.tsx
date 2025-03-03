@@ -4,15 +4,43 @@ import { MdMenu } from "react-icons/md";
 import { HiXMark } from "react-icons/hi2";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks.tsx";
 import { selectSidemenuOpenStatus, sidemenuOpened } from "../../state/sidemenuSlice.ts";
+import { useEffect, useRef } from "react";
 
 const Navbar = () => {
   const isSidemenuOpen = useAppSelector(selectSidemenuOpenStatus);
+
+  const navlinksContainerRef = useRef<HTMLDivElement>(null);
+  const timer = useRef<NodeJS.Timeout | null>(null);
 
   const dispatch = useAppDispatch();
 
   function handleMenuToggleButtonClick(shouldOpen: boolean): void {
     dispatch(sidemenuOpened(shouldOpen));
   }
+
+  useEffect(() => {
+    if (timer.current) {
+      clearTimeout(timer.current);
+    }
+
+    if (isSidemenuOpen) {
+      if (navlinksContainerRef.current) {
+        navlinksContainerRef.current.style.transition = "transform .15s ease-out";
+      }
+    } else {
+      timer.current = setTimeout(() => {
+        if (navlinksContainerRef.current) {
+          navlinksContainerRef.current.style.transition = "none";
+        }
+      }, 200);
+    }
+
+    return () => {
+      if (timer.current) {
+        clearTimeout(timer.current);
+      }
+    };
+  }, [isSidemenuOpen]);
 
   return (
     <nav className={styles.navbar}>
@@ -33,7 +61,10 @@ const Navbar = () => {
           <HiXMark className={styles.menu_toggle_icon} />
         </button>
 
-        <div className={`${styles.navlinks_container} ${isSidemenuOpen && styles.navlinks_visible}`}>
+        <div
+          ref={navlinksContainerRef}
+          className={`${styles.navlinks_container} ${isSidemenuOpen && styles.navlinks_visible}`}
+        >
           <Navlinks />
         </div>
       </div>
